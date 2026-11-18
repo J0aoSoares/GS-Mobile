@@ -15,6 +15,7 @@ export default function Botao({
   desabilitado = false,
   accessibilityLabel,
   accessibilityHint,
+  selecionado,
   style,
 }) {
   const inativo = desabilitado || carregando;
@@ -27,7 +28,7 @@ export default function Botao({
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel || titulo}
       accessibilityHint={accessibilityHint}
-      accessibilityState={{ disabled: inativo, busy: carregando }}
+      accessibilityState={{ disabled: inativo, busy: carregando, selected: selecionado }}
       style={({ pressed }) => [
         estilos.base,
         estilos[variante],

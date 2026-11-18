@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import * as authService from '../services/authService';
 import * as seedService from '../services/seedService';
+import * as iotSimulator from '../services/iotSimulator';
 
 // Contexto de autenticação: guarda o usuário logado e expõe entrar/cadastrar/sair.
 
@@ -51,7 +52,9 @@ export function AuthProvider({ children }) {
   }, []);
 
   // Apaga tudo e recria o seed. A sessão também é apagada, então volta para o login.
+  // O simulador para antes (e termina as gravações pendentes) para não escrever por cima do seed novo.
   const restaurarDemo = useCallback(async () => {
+    await iotSimulator.resetar();
     await seedService.restaurarDemo();
     setUsuario(null);
   }, []);

@@ -42,6 +42,17 @@ export const FAIXAS_CENARIO = {
   [CENARIO.OSCILANDO]: { baixo: 0.5, alto: 40, ruido: 0.5 },
 };
 
+export const ROTULO_CENARIO = {
+  [CENARIO.NORMAL]: 'Normal',
+  [CENARIO.FRACA]: 'Luz fraca',
+  [CENARIO.QUEIMA]: 'Lâmpada queimada',
+  [CENARIO.OSCILANDO]: 'Oscilando',
+  [CENARIO.SENSOR_SUSPEITO]: 'Sensor com defeito',
+};
+
+// Topo da escala do medidor na tela (valores acima aparecem no fim da barra).
+export const ESCALA_MEDIDOR_LUX = 50;
+
 // Quantas leituras ficam no histórico curto (em memória) de cada estação.
 export const TAMANHO_HISTORICO_AO_VIVO = 30;
 

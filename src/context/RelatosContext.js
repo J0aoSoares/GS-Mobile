@@ -1,11 +1,21 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import { useAuth } from './AuthContext';
 import * as relatoService from '../services/relatoService';
 import * as alertaService from '../services/alertaService';
+import * as iotSimulator from '../services/iotSimulator';
 import { ORIGEM } from '../constants/status';
-import { ESTACOES } from '../constants/paradas';
 
 // Contexto de relatos, chamados e alertas do usuário logado.
+// Também liga/desliga a simulação IoT: um único intervalo para o app inteiro,
+// iniciado quando há sessão e limpo no logout e no unmount.
 
 const RelatosContext = createContext(null);
 
@@ -42,12 +52,18 @@ export function RelatosProvider({ children }) {
       return undefined;
     }
     recarregar();
-    return undefined;
+    // A cada gravação do simulador (validação, chamado automático, alerta), recarrega as listas.
+    iotSimulator.iniciar({ aoMudarDados: recarregar });
+    return () => {
+      iotSimulator.parar();
+    };
   }, [usuario, recarregar]);
 
   const criarRelato = useCallback(
     async (dados) => {
       const relato = await relatoService.criarRelato({ ...dados, usuarioId: usuario.id });
+      // Com estação no ponto, o simulador mede uma janela nova e confirma ou contesta.
+      if (!relato.semEstacao) iotSimulator.solicitarValidacao(relato.id, relato.paradaId);
       await recarregar();
       return relato;
     },
@@ -94,6 +110,7 @@ export function RelatosProvider({ children }) {
       marcarTodosLidos,
       buscarRelato: (id) => relatos.find((r) => r.id === id) || null,
       proximosStatus: relatoService.proximosStatus,
+      simularCenario: iotSimulator.definirCenario,
     };
   }, [usuario, relatos, alertas, carregando, erro, recarregar, criarRelato, avancarStatus, marcarAlertaLido, marcarTodosLidos]);
 
@@ -106,8 +123,8 @@ export function useRelatos() {
   return ctx;
 }
 
-// Provisório (etapa 3): estações sem medição. A simulação IoT entra na etapa 4.
-const ESTACOES_SEM_LEITURA = ESTACOES.map((e) => ({ ...e, estado: null, luxAtual: null }));
+// Estado ao vivo das estações, direto da memória do simulador.
+// Usa useSyncExternalStore para que só as telas que leem as estações re-renderizem a cada leitura.
 export function useEstacoes() {
-  return ESTACOES_SEM_LEITURA;
+  return useSyncExternalStore(iotSimulator.assinar, iotSimulator.obterEstacoes);
 }
