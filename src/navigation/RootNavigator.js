@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '../context/AuthContext';
 import { PERFIL } from '../constants/status';
 import Carregando from '../components/Carregando';
@@ -20,5 +21,11 @@ export default function RootNavigator() {
   if (usuario?.perfil === PERFIL.AGENTE) conteudo = <AgenteTabs />;
   else if (usuario?.perfil === PERFIL.CIDADAO) conteudo = <CidadaoTabs />;
 
-  return <NavigationContainer theme={temaNavegacao}>{conteudo}</NavigationContainer>;
+  // Ícones claros sobre o cabeçalho azul; escuros no login (fundo claro).
+  return (
+    <NavigationContainer theme={temaNavegacao}>
+      <StatusBar style={usuario ? 'light' : 'dark'} />
+      {conteudo}
+    </NavigationContainer>
+  );
 }

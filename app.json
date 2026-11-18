@@ -26,7 +26,8 @@
         {
           "photosPermission": "O Luz Segura usa suas fotos apenas para anexar ao relato de um ponto escuro."
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }

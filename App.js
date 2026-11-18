@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from './src/context/AuthContext';
 import { RelatosProvider } from './src/context/RelatosContext';
@@ -11,7 +10,6 @@ export default function App() {
     <SafeAreaProvider>
       <AuthProvider>
         <RelatosProvider>
-          <StatusBar style="light" />
           <RootNavigator />
         </RelatosProvider>
       </AuthProvider>
