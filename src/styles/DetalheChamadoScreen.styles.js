@@ -60,6 +60,7 @@ export default StyleSheet.create({
     backgroundColor: cores.fundoNeutro,
     overflow: 'hidden',
   },
+  restoFator: { backgroundColor: cores.transparente },
   preenchimentoFator: {
     backgroundColor: cores.primaria,
   },

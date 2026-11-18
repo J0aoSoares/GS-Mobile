@@ -38,7 +38,7 @@ function BarraFator({ fator }) {
       </View>
       <View style={estilos.trilhaFator}>
         <View style={[estilos.preenchimentoFator, { flex: fracao }]} />
-        <View style={{ flex: 1 - fracao }} />
+        <View style={[estilos.restoFator, { flex: 1 - fracao }]} />
       </View>
       <Text style={estilos.detalheFator}>{fator.detalhe}</Text>
     </View>
