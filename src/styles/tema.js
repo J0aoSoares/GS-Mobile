@@ -96,3 +96,11 @@ export const sombra = {
   shadowOffset: { width: 0, height: 2 },
   elevation: 2,
 };
+
+export const opacidades = {
+  inativo: 0.55,
+  pressionado: 0.8,
+};
+
+export const TAMANHO_LOGO = 96;
+export const ALTURA_LINHA = 1.4; // multiplicador do tamanho da fonte
