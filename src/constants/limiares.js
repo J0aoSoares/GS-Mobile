@@ -93,3 +93,6 @@ export const TEMPO = {
   MS_POR_HORA: 60 * 60 * 1000,
   HORAS_POR_DIA: 24,
 };
+
+// ---- Foto opcional do relato ----
+export const QUALIDADE_FOTO = 0.6; // compressão da imagem escolhida (0 a 1)
