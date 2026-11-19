@@ -1,5 +1,4 @@
 # 💡 Luz Segura
-
 O cidadão avisa a prefeitura de Osasco sobre pontos de ônibus e ruas escuros à noite. Uma estação IoT no local confirma ou contesta o relato, e o agente de manutenção recebe uma fila priorizada que mostra o motivo de cada prioridade.
 
 ![React Native](https://img.shields.io/badge/React%20Native-0.88-61DAFB?logo=react&logoColor=white)
@@ -16,12 +15,7 @@ O cidadão avisa a prefeitura de Osasco sobre pontos de ônibus e ruas escuros �
 
 | Nome | RM |
 |---|---|
-| João Victor Soares Rodrigues | 551410 |
-| Fabrício Gutierrez Saavedra | _____ |
-| Márcio Gastaldi | _____ |
-| Arthur Bessa Pian | _____ |
-| Davi Almeida Desenzi | _____ |
-
+| João Victor Soares Rodrigues | RM551410 |
 ---
 
 ## 2. Ficha da CitizenTech
@@ -249,3 +243,4 @@ Toda gravação de lista passa por `atualizarLista`, que lê a lista, aplica a f
 - A estação IoT é simulada dentro do app. A estação física (ESP32 + LDR) existe só no Wokwi e não se conecta ao app.
 - A foto do relato é guardada só como URI local. Ela não é enviada para lugar nenhum e pode sumir se o sistema limpar o cache.
 - As coordenadas e o fluxo de pedestres das paradas são aproximados e simulados.
+# GS-Mobile
